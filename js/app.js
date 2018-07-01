@@ -3,15 +3,12 @@
  */
 
 
-
 /*
  * Display the cards on the page
  *   - shuffle the list of cards using the provided "shuffle" method below
  *   - loop through each card and create its HTML
  *   - add each card's HTML to the page
  */
-
-var cards = document.querySelectorAll('.card');
 
 
 // Shuffle function from http://stackoverflow.com/a/2450976
@@ -43,23 +40,108 @@ function shuffle(array) {
  *    + if all cards have matched, display a message with the final score (put this functionality in another function that you call from this one)
  */
 
-var list = [];
+
+var matched = false; // not sure why I need this switch, but ??
+
+
+var list =
+[
+    'fa-diamond',
+    'fa-paper-plane-o',
+    'fa-anchor',
+    'fa-bolt',
+    'fa-cube',
+    'fa-anchor',
+    'fa-leaf',
+    'fa-bicycle',
+    'fa-diamond',
+    'fa-bomb',
+    'fa-leaf',
+    'fa-bomb',
+    'fa-bolt',
+    'fa-bicycle',
+    'fa-paper-plane-o',
+    'fa-cube'
+];
+
+// builder, templateLiteral
+// append builder to `deck`
+// `<li class="card"><i class="fa ${arrayItem}></i></li>`
+
+
+// for (var i = 0; i < list.length; i++){
+
+// }
+
+
+var deck = document.body.querySelector('.deck');
+
+
+
+for (var i = 0; i < list.length; i++) {
+    var html = '';
+    html = document.createElement('li');
+    html.setAttribute('class', 'card');
+    html.innerHTML = `<i class='fa ${list[i]}'></i>`
+    deck.appendChild(html);
+}
+
+/*
+ For [object HTMLLIElement] fix, see https://stackoverflow.com/questions/44953801/getting-object-htmllielement-instead-of-text-javascript-function
+*/
+
+
+
+// placing cards variable above for-loop breaks eventListener feature
+var cards = document.querySelectorAll('.card');
 
 cards.forEach(function(card){
-  
-  
-  card.addEventListener('click', function(e){
-      console.log(e.currentTarget);
-      
-      if (card.classList.length > 0) {
-          card.classList.value = 0; // actually removes all associated classes
+
+
+    card.addEventListener('click', function(e){
+
+    if (list.includes(card)){
+
+        console.log(`${card} already added to ${list}`);
+    } else {
+        list.push(card);
+        console.log('this is: ' + card);
+        /*
+ For [object HTMLLIElement] fix, see https://stackoverflow.com/questions/44953801/getting-object-htmllielement-instead-of-text-javascript-function
+*/
+
+    }
+
+    console.log('Card clicked is: ' + e.currentTarget);
+
+
+    if (card.classList.length < 2) {
+        // test: actually removes all associated classes
+        // card.classList.value = 0;
+        card.classList.add('open', 'show');
+        var openCards = [];
+        openCards.push(card);
       }
-  });
-  
+    console.log(openCards);
+
+
+
+    });
+
+
+    // how to match: currentArrayItem === previousArrayItem ?
+
+    // for (var i = 0; i < openCards.length; i++) {
+    //     if (card === openCards[i].)
+    // }
+
 });
 
-function clearList() {
-    list = [];
-}
+
+
+
+console.log("help2");
+
+
 
 
