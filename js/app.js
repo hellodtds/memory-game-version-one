@@ -44,6 +44,7 @@ function shuffle(array) {
 
 var matched = false; // not sure why I need this switch, but ??
 
+var deck = document.body.querySelector('.deck');
 
 var list = [
     'fa-diamond',
@@ -64,30 +65,33 @@ var list = [
     'fa-cube'
 ];
 
-var deck = document.body.querySelector('.deck');
 
 
-var makeDeck = function(input) {
-    console.dir(input);
 
+var makeDeck = function(array) {
+    // For info, see: Array.prototype.values() in MDN web docs
 
-    var itemCount = input.length - 1;
+    const iterator = array.values();
     var html = '';
+    html = document.createElement('li');
+    html.setAttribute('class', 'card');
 
-    for (var item = 0; item <= itemCount; item++) {
+    for (const value of iterator) {
+        console.log(value);
 
-        html = document.createElement('li');
-        html.setAttribute('class', 'card');
-        html.innerHTML = `<i class='fa ${input[item]}'></i>`;
-        deck.appendChild(html);
+
+        html.innerHTML = `<i class='fa ${iterator.next().value}'></i>`;
     }
+
+    deck.appendChild(html);
+
 };
 
 
 
 // Shuffle Array list and make list of cards
 makeDeck(shuffle(list));
-console.log(shuffle(list));
+
 
 
 // var showCard = function(item) {
