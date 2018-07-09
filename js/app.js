@@ -76,12 +76,20 @@ var list = [
 
 var deck = document.body.querySelector('.deck');
 
-var openCards = [];
 
-for (var i = 0; i < list.length; i++) {
+var makeDeck = function(input) {
+    var item;
+    var itemCount = list.length - 1;
     var html = '';
-    html = document.createElement('li');
-    html.setAttribute('class', 'card');
-    html.innerHTML = `<i class='fa ${list[i]}'></i>`
-    deck.appendChild(html);
-}
+
+    for (item = 0; item <= itemCount; item++) {
+
+        html = document.createElement('li');
+        html.setAttribute('class', 'card');
+        html.innerHTML = `<i class='fa ${itemCount[item]}'></i>`;
+        deck.appendChild(html);
+    }
+};
+
+// Make memory cards from Array `list`
+makeDeck(list);
