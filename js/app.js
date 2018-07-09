@@ -64,32 +64,53 @@ var list = [
     'fa-cube'
 ];
 
-// builder, templateLiteral
-// append builder to `deck`
-// `<li class="card"><i class="fa ${arrayItem}></i></li>`
-
-
-// for (var i = 0; i < list.length; i++){
-
-// }
-
-
 var deck = document.body.querySelector('.deck');
 
 
 var makeDeck = function(input) {
-    var item;
-    var itemCount = list.length - 1;
+    console.dir(input);
+
+
+    var itemCount = input.length - 1;
     var html = '';
 
-    for (item = 0; item <= itemCount; item++) {
+    for (var item = 0; item <= itemCount; item++) {
 
         html = document.createElement('li');
         html.setAttribute('class', 'card');
-        html.innerHTML = `<i class='fa ${itemCount[item]}'></i>`;
+        html.innerHTML = `<i class='fa ${input[item]}'></i>`;
         deck.appendChild(html);
     }
 };
 
-// Make memory cards from Array `list`
-makeDeck(list);
+
+
+// Shuffle Array list and make list of cards
+makeDeck(shuffle(list));
+console.log(shuffle(list));
+
+
+// var showCard = function(item) {
+//     // this.classList.add('show', 'open');
+//     console.log('show card')
+
+// };
+
+// list.forEach(function(item) {
+//     item.addEventListener('click', function(e) {
+
+//         item.showCard;
+
+//     });
+// });
+
+var cards = Array.from(deck.children);
+var bouncer = [];
+
+
+cards.forEach(function(item) {
+    item.addEventListener('click', function(e) {
+        item.classList.toggle('open');
+        item.classList.toggle('show');
+    });
+});
