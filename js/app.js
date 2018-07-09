@@ -69,21 +69,20 @@ var list = [
 
 
 var makeDeck = function(array) {
+    var listItem = '';
+
+
     // For info, see: Array.prototype.values() in MDN web docs
+    let iterator = array.values();
 
-    const iterator = array.values();
-    var html = '';
-    html = document.createElement('li');
-    html.setAttribute('class', 'card');
-
-    for (const value of iterator) {
-        console.log(value);
-
-
-        html.innerHTML = `<i class='fa ${iterator.next().value}'></i>`;
+    for (let value of iterator) {
+        listItem = document.createElement('li');
+        listItem.setAttribute('class', 'card');
+        listItem.innerHTML = `<i class='fa ${value}'></i>`;
+        deck.appendChild(listItem);
     }
 
-    deck.appendChild(html);
+
 
 };
 
