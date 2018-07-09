@@ -13,7 +13,8 @@
 
 // Shuffle function from http://stackoverflow.com/a/2450976
 function shuffle(array) {
-    var currentIndex = array.length, temporaryValue, randomIndex;
+    var currentIndex = array.length,
+        temporaryValue, randomIndex;
 
     while (currentIndex !== 0) {
         randomIndex = Math.floor(Math.random() * currentIndex);
@@ -44,8 +45,7 @@ function shuffle(array) {
 var matched = false; // not sure why I need this switch, but ??
 
 
-var list =
-[
+var list = [
     'fa-diamond',
     'fa-paper-plane-o',
     'fa-anchor',
@@ -86,129 +86,126 @@ for (var i = 0; i < list.length; i++) {
     deck.appendChild(html);
 }
 
+
+
+
+
+
+
+
+
+
 // Test to try to fix: HTMLLIElement problem
+// var cardList = Array.from(deck.children);
+// var matchCards = [];
 
-var cardList = Array.from(deck.children);
-var matchCards = [];
+// cardList.forEach(function(card) {
 
-cardList.forEach(function(card){
+//     // YES! This gives me the correct class name, fa-* !!! Yay!
 
-    // YES! This gives me the correct class name, fa-* !!! Yay!
-
-    card.addEventListener('click', function(e){
-        console.log("Card element obj type is: " + typeof(card.lastElementChild.classList[1]));
-
-
-        var firstCard = card.lastElementChild.classList[1];
-        console.log("First card is: " + firstCard);
-        matchCards.push(firstCard); // capture 1
-
-        // secondCard is erroring with "undefined"
-
-        // how do i capture the second card. dig into eventListeners to see how to track click order ???
+//     // card.addEventListener('click', function(e){
+//     //     console.log("Card element obj type is: " + typeof(card.lastElementChild.classList[1]));
 
 
-        // var secondCard = card.classList[1];
-        // console.log(secondCard);
-        // console.log("Second card is: " + secondCard);
+//     //     var firstCard = card.lastElementChild.classList[1];
+//     //     console.log("First card is: " + firstCard);
+//     //     matchCards.push(firstCard); // capture 1
 
-        matchCards.push(secondCard); // capture 2
+//     //     // secondCard is erroring with "undefined"
 
-        // if (firstCard == secondCard) {
-        //     alert("You matched!");
-
-        // }
-
-        console.log(matchCards);
-        console.log("You clicked me at: " + e.timeStamp);
-        console.log(e);
-
-        matchCards = [];
+//     //     // how do i capture the second card. dig into eventListeners to see how to track click order ???
 
 
-    });
+//     //     // var secondCard = card.classList[1];
+//     //     // console.log(secondCard);
+//     //     // console.log("Second card is: " + secondCard);
+
+//     //     matchCards.push(secondCard); // capture 2
+
+//     //     // if (firstCard == secondCard) {
+//     //     //     alert("You matched!");
+
+//     //     // }
+
+//     //     console.log(matchCards);
+//     //     console.log("You clicked me at: " + e.timeStamp);
+//     //     console.log(e);
+
+//     //     matchCards = [];
 
 
-});
+//     // });
+
+
+// });
 
 
 /*
  For [object HTMLLIElement] fix, see https://stackoverflow.com/questions/44953801/getting-object-htmllielement-instead-of-text-javascript-function
 */
 
-
-
 // placing cards variable above for-loop breaks eventListener feature
-var cards = document.querySelectorAll('.card');
+// var cards = document.querySelectorAll('.card');
 
-cards.forEach(function(card){
-
-
-    card.addEventListener('click', function(e){
-
-    if (list.includes(card)){
-
-        console.log(`${card} already added to ${list}`);
-    } else {
-        list.push(card);
-        console.log('this is: ' + card);
-        /*
- For [object HTMLLIElement] fix, see https://stackoverflow.com/questions/44953801/getting-object-htmllielement-instead-of-text-javascript-function
-*/
-
-    }
-
-    console.log('Card clicked is: ' + e.currentTarget);
+// cards.forEach(function(card) {
 
 
-    if (card.classList.length < 2) {
-        // test: actually removes all associated classes
-        // card.classList.value = 0;
-        card.classList.add('open', 'show');
+//     card.addEventListener('click', function(e) {
 
-        openCards.push(card);
-      }
-    console.log(openCards);
+//         if (list.includes(card)) {
 
+//             console.log(`${card} already added to ${list}`);
+//         } else {
+//             list.push(card);
+//             console.log('this is: ' + card);
+//             /*
+//  For [object HTMLLIElement] fix, see https://stackoverflow.com/questions/44953801/getting-object-htmllielement-instead-of-text-javascript-function
+// */
 
+//         }
 
-    });
-
-
-    // how to match: currentArrayItem === previousArrayItem ?
-
-    // for (var i = 0; i < openCards.length; i++) {
-    //     if (card === openCards[i].)
-    // }
+//         console.log('Card clicked is: ' + e.currentTarget);
 
 
-    // Test for:
-    // innerHTML: "<i class=\"fa fa-cube\"></i>"
-    // lastElementChild: i.fa.fa-cube
-    // classList: DOMTokenList [ "fa", "fa-cube" ]
-    // className: "fa fa-cube"
+//         if (card.classList.length < 2) {
+//             // test: actually removes all associated classes
+//             // card.classList.value = 0;
+//             card.classList.add('open', 'show');
 
-    // Idea:Play with cardList[0].lastElementChild.classList
+//             openCards.push(card);
+//         }
+//         console.log(openCards);
 
 
 
-    for (var i = 0; i < openCards.length; i++) {
-        if (card.matches(openCards[i - 1])) {
-            var previousCard = '';
-            previousCard = openCards[i];
-
-            card.classList.add('matched');
-            previousCard.classList.add('matched');
-        }
-    }
-
-});
+//     });
 
 
+//     // how to match: currentArrayItem === previousArrayItem ?
+
+//     // for (var i = 0; i < openCards.length; i++) {
+//     //     if (card === openCards[i].)
+//     // }
 
 
-console.log("help2");
+//     // Test for:
+//     // innerHTML: "<i class=\"fa fa-cube\"></i>"
+//     // lastElementChild: i.fa.fa-cube
+//     // classList: DOMTokenList [ "fa", "fa-cube" ]
+//     // className: "fa fa-cube"
+
+//     // Idea:Play with cardList[0].lastElementChild.classList
 
 
 
+//     // for (var i = 0; i < openCards.length; i++) {
+//     //     if (card.matches(openCards[i - 1])) {
+//     //         var previousCard = '';
+//     //         previousCard = openCards[i];
 
+//     //         card.classList.add('matched');
+//     //         previousCard.classList.add('matched');
+//     //     }
+//     // }
+
+// });
