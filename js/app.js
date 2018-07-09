@@ -81,9 +81,6 @@ var makeDeck = function(array) {
         listItem.innerHTML = `<i class='fa ${value}'></i>`;
         deck.appendChild(listItem);
     }
-
-
-
 };
 
 
@@ -93,27 +90,21 @@ makeDeck(shuffle(list));
 
 
 
-// var showCard = function(item) {
-//     // this.classList.add('show', 'open');
-//     console.log('show card')
 
-// };
-
-// list.forEach(function(item) {
-//     item.addEventListener('click', function(e) {
-
-//         item.showCard;
-
-//     });
-// });
 
 var cards = Array.from(deck.children);
 var bouncer = [];
 
 
-cards.forEach(function(item) {
-    item.addEventListener('click', function(e) {
-        item.classList.toggle('open');
-        item.classList.toggle('show');
-    });
+cards.forEach(function(card) {
+    // bouncer[bouncer.length] = card; // adds all cards to bouncer Array
+
+    card.addEventListener('click', showCard);
 });
+
+
+/* Functions go here */
+function showCard() {
+    this.classList.toggle('open');
+    this.classList.toggle('show');
+}
