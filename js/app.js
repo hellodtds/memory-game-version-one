@@ -108,7 +108,7 @@ cards.forEach(function(card) {
 /* Functions go here */
 /**********************************************************************/
 
-/* VERSION TWO IS MORE ELEGANT, KEEP FOR NOW */
+/* Important Note =>VERSION TWO IS MORE ELEGANT, KEEP FOR NOW */
 
 /********************************************************************/
 /*******************************************************************/
@@ -120,7 +120,7 @@ cards.forEach(function(card) {
 
 
 
-/********************* VERSION 1, DO NOT REMOVE *********************/
+/********************* VERSION ONE, DO NOT REMOVE *********************/
 // function showCard() {
 
 //     // var card = document.querySelector('li');
@@ -142,8 +142,9 @@ cards.forEach(function(card) {
 //     // this.classList.toggle('show');
 // }
 
+
 /********************* VERSION TWO, DO NOT REMOVE *********************/
-function showCard() {
+function showCard(card) {
 
     // var card = document.querySelector('li');
     card = this;
@@ -163,9 +164,5 @@ function showCard() {
         classes.add(...cls);
     }
 
-    if (result.contains('open', 'show')) {
-        card.onclick = function(e) {
-            classes.remove(...cls);
-        };
-    }
+
 }
