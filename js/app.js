@@ -2,50 +2,6 @@
  * Create a list that holds all of your cards
  */
 
-
-/*
- * Display the cards on the page
- *   - shuffle the list of cards using the provided "shuffle" method below
- *   - loop through each card and create its HTML
- *   - add each card's HTML to the page
- */
-
-
-// Shuffle function from http://stackoverflow.com/a/2450976
-function shuffle(array) {
-    var currentIndex = array.length,
-        temporaryValue, randomIndex;
-
-    while (currentIndex !== 0) {
-        randomIndex = Math.floor(Math.random() * currentIndex);
-        currentIndex -= 1;
-        temporaryValue = array[currentIndex];
-        array[currentIndex] = array[randomIndex];
-        array[randomIndex] = temporaryValue;
-    }
-
-    return array;
-}
-
-
-/*
- * set up the event listener for a card. If a card is clicked:
- *  - display the card's symbol (put this functionality in another function that you call from this one)
- *  - add the card to a *list* of "open" cards (put this functionality in another function that you call from this one)
- *  - if the list already has another card, check to see if the two cards match
- *    + if the cards do match, lock the cards in the open position (put this functionality in another function that you call from this one)
-
- *    + if the cards do not match, remove the cards from the list and hide the card's symbol (put this functionality in another function that you call from this one)
-
- *    + increment the move counter and display it on the page (put this functionality in another function that you call from this one)
- *    + if all cards have matched, display a message with the final score (put this functionality in another function that you call from this one)
- */
-
-
-var matched = false; // not sure why I need this switch, but ??
-
-var deck = document.body.querySelector('.deck');
-
 var list = [
     'fa-diamond',
     'fa-paper-plane-o',
@@ -65,13 +21,17 @@ var list = [
     'fa-cube'
 ];
 
+/*
+ * Display the cards on the page
+ *   - shuffle the list of cards using the provided "shuffle" method below
+ *   - loop through each card and create its HTML
+ *   - add each card's HTML to the page
+ */
 
-
+var deck = document.body.querySelector('.deck');
 
 var makeDeck = function(array) {
     var listItem = '';
-
-
     // For info, see: Array.prototype.values() in MDN web docs
     let iterator = array.values();
 
@@ -82,17 +42,73 @@ var makeDeck = function(array) {
         deck.appendChild(listItem);
     }
 };
-
-
-
 // Shuffle Array list and make list of cards
 makeDeck(shuffle(list));
 
-
-
-
 // Turn HTMLLIElement list into ARRAY
 var cards = Array.from(deck.children);
+
+
+/*
+ * set up the event listener for a card. If a card is clicked:
+ *  - display the card's symbol (put this functionality in another function that you call from this one)
+ *  - add the card to a *list* of "open" cards (put this functionality in another function that you call from this one)
+ *  - if the list already has another card, check to see if the two cards match
+ *    + if the cards do match, lock the cards in the open position (put this functionality in another function that you call from this one)
+
+ *    + if the cards do not match, remove the cards from the list and hide the card's symbol (put this functionality in another function that you call from this one)
+
+ *    + increment the move counter and display it on the page (put this functionality in another function that you call from this one)
+ *    + if all cards have matched, display a message with the final score (put this functionality in another function that you call from this one)
+ */
+
+
+var matched = false; // not sure why I need this switch, but ??
+
+
+
+
+
+var bouncer = [];
+cards.forEach(showCard);
+
+// READ: EventTarget.addEventListener() in MDN web docs
+
+
+
+/* FUNCTIONS */
+
+// Shuffle function from http://stackoverflow.com/a/2450976
+function shuffle(array) {
+    var currentIndex = array.length,
+        temporaryValue, randomIndex;
+
+    while (currentIndex !== 0) {
+        randomIndex = Math.floor(Math.random() * currentIndex);
+        currentIndex -= 1;
+        temporaryValue = array[currentIndex];
+        array[currentIndex] = array[randomIndex];
+        array[randomIndex] = temporaryValue;
+    }
+
+    return array;
+}
+
+function showCard(element, index, array) {
+
+    // For info, see: CSSStyleDeclaration.setProperty() in MDN web docs
+    // card.style.setProperty('font-size', '12px');
+
+    var cls = ['show', 'open'];
+    var result = element.classList;
+
+    // Add or remove multiple classes using spread operator
+    element.onclick = function() {
+        result.add(...cls);
+    };
+}
+
+/*** HACKS ***/
 
 // cards.forEach(function(card) {
 //     // bouncer[bouncer.length] = card; // adds all cards to bouncer Array
@@ -104,13 +120,10 @@ var cards = Array.from(deck.children);
 // });
 
 
-// for (var i = 0; len = cards.length; i < len; i++) {
 
+/* CRAPPY VERSION DO NOT USE!
 
-// }
-
-var bouncer = [];
-cards.forEach(function(element) {
+function showCard(element) {
 
     // var attribute = element.getAttribute('');
 
@@ -155,80 +168,6 @@ cards.forEach(function(element) {
 
     // });
 
-});
-
-
-
-
-/**************************************************************************/
-/******** FUNCTIONS GOOOOO HERE!!!!  *************************************/
-/************************************************************************/
-
-/* Important Note =>VERSION TWO IS MORE ELEGANT, KEEP FOR NOW */
-
-/********************************************************************/
-/*******************************************************************/
-/******************************************************************/
-/*****************************************************************/
-/****************************************************************/
-
-
-/**************************************************************************/
-// TRACK OPEN CARDS
-/**************************************************************************/
-
-
-
-
-
-
-
-/********************* VERSION ONE, DO NOT REMOVE *********************/
-// function showCard() {
-
-//     // var card = document.querySelector('li');
-//     card = this;
-
-//     var classes = card.classList;
-
-//     // For info, see: CSSStyleDeclaration.setProperty() in MDN web docs
-//     card.style.setProperty('font-size', '12px');
-
-//     var result = classes.toggle('c');
-
-//     if (result) {
-//         card.textContent = "'c' added. classList is now'" + classes + "'.";
-//     } else {
-//         card.textContent = "'c' removed. classList is now'" + classes + "'.";
-//     }
-//     // this.classList.toggle('open');
-//     // this.classList.toggle('show');
-// }
-
-
-/********************* VERSION TWO, DO NOT REMOVE *********************/
-function showCard(card) {
-
-    // var card = document.querySelector('li');
-    card = this;
-
-    var classes = card.classList;
-
-    // For info, see: CSSStyleDeclaration.setProperty() in MDN web docs
-    // card.style.setProperty('font-size', '12px');
-
-
-    // add or remove multiple classes
-    var cls = ['show', 'open'];
-
-    var result = classes;
-
-
-
-    if (!result.contains('show', 'open')) {
-        classes.add(...cls);
-    }
-
 }
 
-// READ: EventTarget.addEventListener() in MDN web docs
+*/
