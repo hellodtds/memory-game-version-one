@@ -104,6 +104,31 @@ cards.forEach(function(card) {
 
 
 /* Functions go here */
+
+
+/********************* VERSION 1, DO NOT REMOVE *********************/
+// function showCard() {
+
+//     // var card = document.querySelector('li');
+//     card = this;
+
+//     var classes = card.classList;
+
+//     // For info, see: CSSStyleDeclaration.setProperty() in MDN web docs
+//     card.style.setProperty('font-size', '12px');
+
+//     var result = classes.toggle('c');
+
+//     if (result) {
+//         card.textContent = "'c' added. classList is now'" + classes + "'.";
+//     } else {
+//         card.textContent = "'c' removed. classList is now'" + classes + "'.";
+//     }
+//     // this.classList.toggle('open');
+//     // this.classList.toggle('show');
+// }
+
+/********************* VERSION TWO, DO NOT REMOVE *********************/
 function showCard() {
 
     // var card = document.querySelector('li');
@@ -112,15 +137,24 @@ function showCard() {
     var classes = card.classList;
 
     // For info, see: CSSStyleDeclaration.setProperty() in MDN web docs
-    card.style.setProperty('font-size', '12px');
+    // card.style.setProperty('font-size', '12px');
 
-    var result = classes.toggle('c');
 
-    if (result) {
-        card.textContent = "'c' added. classList is now'" + classes + "'.";
-    } else {
-        card.textContent = "'c' removed. classList is now'" + classes + "'.";
+    // add or remove multiple classes
+    var cls = ['show', 'open'];
+
+    var result = classes;
+
+    if (!result.contains('show', 'open')) {
+        classes.add(...cls);
     }
-    // this.classList.toggle('open');
-    // this.classList.toggle('show');
+
+    if (result.contains('open', 'show')) {
+        card.onclick = function(e) {
+            classes.remove(...cls);
+        };
+    }
+
+
+
 }
