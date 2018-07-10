@@ -105,6 +105,22 @@ cards.forEach(function(card) {
 
 /* Functions go here */
 function showCard() {
-    this.classList.toggle('open');
-    this.classList.toggle('show');
+
+    // var card = document.querySelector('li');
+    card = this;
+
+    var classes = card.classList;
+
+    // For info, see: CSSStyleDeclaration.setProperty() in MDN web docs
+    card.style.setProperty('font-size', '12px');
+
+    var result = classes.toggle('c');
+
+    if (result) {
+        card.textContent = "'c' added. classList is now'" + classes + "'.";
+    } else {
+        card.textContent = "'c' removed. classList is now'" + classes + "'.";
+    }
+    // this.classList.toggle('open');
+    // this.classList.toggle('show');
 }
