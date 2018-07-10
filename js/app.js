@@ -45,8 +45,7 @@ var makeDeck = function(array) {
 // Shuffle Array list and make list of cards
 makeDeck(shuffle(list));
 
-// Turn HTMLLIElement list into ARRAY
-var cards = Array.from(deck.children);
+
 
 
 /*
@@ -63,18 +62,17 @@ var cards = Array.from(deck.children);
  */
 
 
+
+// Turn HTMLLIElement list into ARRAY
+var cards = Array.from(deck.children);
 var matched = false; // not sure why I need this switch, but ??
 
+var daBouncer = [];
 
 
-
-
-var bouncer = [];
 cards.forEach(showCard);
 
 // READ: EventTarget.addEventListener() in MDN web docs
-
-
 
 /* FUNCTIONS */
 
@@ -96,17 +94,57 @@ function shuffle(array) {
 
 function showCard(element, index, array) {
 
+
     // For info, see: CSSStyleDeclaration.setProperty() in MDN web docs
     // card.style.setProperty('font-size', '12px');
 
-    var cls = ['show', 'open'];
-    var result = element.classList;
-
     // Add or remove multiple classes using spread operator
     element.onclick = function() {
-        result.add(...cls);
+        var cls = ['show', 'open'];
+        var result = element.classList;
+
+        daBouncer.push(element);
+
+        // possibly move if outside of click handler
+
+        if (daBouncer.length === 0) {
+            var card0 = daBouncer[0].innerHTML;
+            result.add(...cls);
+
+        }
+        if (daBouncer.length === 1) {
+            var card1 = daBouncer[1].innerHTML;
+            result.add(...cls);
+        }
+
+        matchCards(card0, card1);
+
+
+
+
+
+
+
+
+
+        console.log('Element: ', element);
+        console.log('Index: ' + index);
+        console.log('Array: ', array); // When I concat string with arr, a HTMLLIElement is returned ???
+        console.log(array[index].firstChild);
     };
+
 }
+
+function matchCards(c1, c2) {
+
+    if (c1 === c2) {
+        return true;
+    }
+
+}
+
+
+
 
 /*** HACKS ***/
 
