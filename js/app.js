@@ -91,22 +91,78 @@ makeDeck(shuffle(list));
 
 
 
-
+// Turn HTMLLIElement list into ARRAY
 var cards = Array.from(deck.children);
+
+// cards.forEach(function(card) {
+//     // bouncer[bouncer.length] = card; // adds all cards to bouncer Array
+//     // card.addEventListener('click', showCard);
+//     // Arrow function info, https://eloquentjavascript.net/15_event.html
+//     card.addEventListener('click', event => {
+//         event.target.classList.add('show', 'open');
+//     });
+// });
+
+
+// for (var i = 0; len = cards.length; i < len; i++) {
+
+
+// }
+
 var bouncer = [];
+cards.forEach(function(element) {
+
+    // var attribute = element.getAttribute('');
+
+    element.onclick = function() {
 
 
-cards.forEach(function(card) {
-    // bouncer[bouncer.length] = card; // adds all cards to bouncer Array
+        // for testing
+        element.classList.add('open', 'show');
 
-    card.addEventListener('click', showCard);
+
+        bouncer.push(element.innerHTML);
+        // console.log(bouncer.length + " " + element.innerHTML);
+
+        // console.log(bouncer.indexOf(element.innerHTML));
+
+
+        var found = bouncer.indexOf(element.innerHTML);
+        console.log(found);
+        console.log(bouncer[found]);
+
+        // if (element.innerHTML === bouncer[found]) {
+        //     bouncer[found].classList.add('matched');
+        //     element.classList.add('matched');
+        // }
+
+
+        // return console.log(element.innerHTML);
+
+
+    }
+
+
+    // allCards.addEventlistener('click', event => {
+    //     if (!event.target.classList.contains('show', 'open')) {
+    //         event.target.classList.remove('show', 'open');
+    //     } else {
+    //         event.target.classList.add('show', 'open');
+    //     }
+
+    //     // event.preventDefault();
+
+
+    // });
+
 });
 
 
 
-/**********************************************************************/
-/* Functions go here */
-/**********************************************************************/
+
+/**************************************************************************/
+/******** FUNCTIONS GOOOOO HERE!!!!  *************************************/
+/************************************************************************/
 
 /* Important Note =>VERSION TWO IS MORE ELEGANT, KEEP FOR NOW */
 
@@ -115,6 +171,13 @@ cards.forEach(function(card) {
 /******************************************************************/
 /*****************************************************************/
 /****************************************************************/
+
+
+/**************************************************************************/
+// TRACK OPEN CARDS
+/**************************************************************************/
+
+
 
 
 
@@ -160,9 +223,12 @@ function showCard(card) {
 
     var result = classes;
 
+
+
     if (!result.contains('show', 'open')) {
         classes.add(...cls);
     }
 
-
 }
+
+// READ: EventTarget.addEventListener() in MDN web docs
