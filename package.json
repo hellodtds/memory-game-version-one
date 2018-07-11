@@ -18,6 +18,7 @@
   "homepage": "https://github.com/udacity/fend-project-memory-game#readme",
   "devDependencies": {
     "browser-sync": "^2.24.5",
+    "eslint-config-google": "^0.9.1",
     "gulp": "^4.0.0",
     "gulp-autoprefixer": "^5.0.0",
     "gulp-jasmine-phantom": "^3.0.0"

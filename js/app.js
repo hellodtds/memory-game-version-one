@@ -2,7 +2,7 @@
  * Create a list that holds all of your cards
  */
 
-var list = [
+let list = [
     'fa-diamond',
     'fa-paper-plane-o',
     'fa-anchor',
@@ -28,10 +28,10 @@ var list = [
  *   - add each card's HTML to the page
  */
 
-var deck = document.body.querySelector('.deck');
+let deck = document.body.querySelector('.deck');
 
-var makeDeck = function(array) {
-    var listItem = '';
+let makeDeck = function(array) {
+    let listItem = '';
     // For info, see: Array.prototype.values() in MDN web docs
     let iterator = array.values();
 
@@ -42,11 +42,9 @@ var makeDeck = function(array) {
         deck.appendChild(listItem);
     }
 };
+
 // Shuffle Array list and make list of cards
 makeDeck(shuffle(list));
-
-
-
 
 /*
  * set up the event listener for a card. If a card is clicked:
@@ -65,16 +63,57 @@ makeDeck(shuffle(list));
 
 // Turn HTMLLIElement list into ARRAY
 var cards = Array.from(deck.children);
-var matched = false; // not sure why I need this switch, but ??
-
-var daBouncer = [];
 
 
-cards.forEach(showCard);
+cards.forEach(function(item) {
 
-// READ: EventTarget.addEventListener() in MDN web docs
+    // Add a click handler
+
+
+
+    // displayCard
+
+    // addCard to open *list*
+
+    // conditional statements
+
+
+
+    // check for item match
+
+    // if match, lock items in .open and .show state, and remove from *list*
+
+    // if no match, remove and hide items from *list*
+
+    // increment counter, each card click
+
+    // if all items open, then stop counter and display *winner* message*
+
+});
+
+
+
+
 
 /* FUNCTIONS */
+function showCard(item) {
+    item = this;
+
+    this.classList.toggle('show');
+    this.classList.toggle('open');
+
+}
+
+function matchItem(a, b) {
+
+    if (a === b) {
+        return "match";
+    } else {
+        return "no match";
+    }
+
+}
+
 
 // Shuffle function from http://stackoverflow.com/a/2450976
 function shuffle(array) {
@@ -91,68 +130,3 @@ function shuffle(array) {
 
     return array;
 }
-
-function showCard(element, index, array) {
-
-
-    // For info, see: CSSStyleDeclaration.setProperty() in MDN web docs
-    // card.style.setProperty('font-size', '12px');
-
-    // Add or remove multiple classes using spread operator
-    element.onclick = function() {
-        var cls = ['show', 'open'];
-        var result = element.classList;
-
-        daBouncer.push(element);
-
-        // possibly move if outside of click handler
-
-        if (daBouncer.length === 0) {
-            var card0 = daBouncer[0].innerHTML;
-            result.add(...cls);
-
-        }
-        if (daBouncer.length === 1) {
-            var card1 = daBouncer[1].innerHTML;
-            result.add(...cls);
-        }
-
-        matchCards(card0, card1);
-
-
-
-
-
-
-
-
-
-        console.log('Element: ', element);
-        console.log('Index: ' + index);
-        console.log('Array: ', array); // When I concat string with arr, a HTMLLIElement is returned ???
-        console.log(array[index].firstChild);
-    };
-
-}
-
-function matchCards(c1, c2) {
-
-    if (c1 === c2) {
-        return true;
-    }
-
-}
-
-
-
-
-/*** HACKS ***/
-
-// cards.forEach(function(card) {
-//     // bouncer[bouncer.length] = card; // adds all cards to bouncer Array
-//     // card.addEventListener('click', showCard);
-//     // Arrow function info, https://eloquentjavascript.net/15_event.html
-//     card.addEventListener('click', event => {
-//         event.target.classList.add('show', 'open');
-//     });
-// });
