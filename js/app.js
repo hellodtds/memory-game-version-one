@@ -96,23 +96,7 @@ cards.forEach(function(item) {
 
 
 /* FUNCTIONS */
-function showCard(item) {
-    item = this;
 
-    this.classList.toggle('show');
-    this.classList.toggle('open');
-
-}
-
-function matchItem(a, b) {
-
-    if (a === b) {
-        return "match";
-    } else {
-        return "no match";
-    }
-
-}
 
 
 // Shuffle function from http://stackoverflow.com/a/2450976
