@@ -1,0 +1,38 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+</head>
+
+<body>
+    <p>hello</p>
+    <p>hello</p>
+    <p>hello</p>
+    <p>hello</p>
+    <p>hello</p>
+
+    <script>
+        function hide(e) {
+            e.currentTarget.style.visibility = "hidden";
+            console.log(e.currentTarget);
+            // When this function is used as an event handler: this === e.currentTarget
+        }
+
+        var ps = document.getElementsByTagName('p');
+
+        for (var i = 0; i < ps.length; i++) {
+            // console: print the clicked <p> element 
+            ps[i].addEventListener('click', hide, false);
+        }
+        // console: print <body>
+        document.body.addEventListener('click', hide, false);
+
+        // click around and make paragraphs disappear
+    </script>
+</body>
+
+</html>
