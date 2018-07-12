@@ -28,7 +28,8 @@ function gameBoard() {
         li.setAttribute('class', 'card');
         li.innerHTML = `<i class='fa ${list[i]}'></i>`;
 
-        li.addEventListener('click', show, false);
+        // li.addEventListener('click', show, false);
+        li.addEventListener('click', gameRules, false);
 
         deck.appendChild(li);
     }
@@ -40,6 +41,16 @@ function gameBoard() {
 gameBoard(); // create game board;
 
 
+function gameRules(el) {
+    this.el = this;
+    show.apply(this.el, arguments);
+    // write another function
+    hello.apply(this.el, arguments);
+    // write another function
+    matcher.apply(this.el, arguments);
+}
+
+
 function show(e) {
     e.currentTarget.classList.toggle('show');
     e.currentTarget.classList.toggle('open');
@@ -49,6 +60,18 @@ function show(e) {
 }
 
 
+function hello(e) {
+    alert('hello');
+}
+
+function matcher(el) {
+    this.el = this;
+
+    let compareRobot = [];
+
+    alert(this.el.innerHTML);
+
+}
 
 /************* OlD WaY Of BuIldInG CaRd DeCk *************************/
 
