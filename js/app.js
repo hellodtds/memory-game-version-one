@@ -43,9 +43,14 @@ gameBoard(); // create game board;
 
 function gameRules(el) {
     this.el = this;
+    open.apply(this.el, arguments);
+
+    // write another function
     show.apply(this.el, arguments);
+
     // write another function
     hello.apply(this.el, arguments);
+
     // write another function
     matcher.apply(this.el, arguments);
 }
@@ -53,9 +58,28 @@ function gameRules(el) {
 
 function show(e) {
     e.currentTarget.classList.toggle('show');
+
+
+    if (e.currentTarget.classList.contains('show')) {
+        alert("show card");
+    } else {
+        alert("hide card");
+    }
+
+    console.log("show function target: " + e.currentTarget.innerHTML);
+    // When this function is used as an event handler: this === e.currentTarget
+}
+
+function open(e) {
     e.currentTarget.classList.toggle('open');
-    console.log(e.currentTarget);
-    console.log(e);
+
+    if (e.currentTarget.classList.contains('open')) {
+        alert("open card");
+    } else {
+        alert("close card");
+    }
+
+    console.log("open function target: " + e.currentTarget.innerHTML);
     // When this function is used as an event handler: this === e.currentTarget
 }
 
@@ -64,14 +88,22 @@ function hello(e) {
     alert('hello');
 }
 
-function matcher(el) {
-    this.el = this;
+function matcher(e) {
 
-    let compareRobot = [];
 
-    alert(this.el.innerHTML);
+    let compare = function compareBot(e) {
+        return e.currentTarget.innerHTML;
+    }
 
+    let item = compare(e);
+
+
+    alert(item);
 }
+
+
+
+
 
 /************* OlD WaY Of BuIldInG CaRd DeCk *************************/
 
@@ -106,8 +138,6 @@ function matcher(el) {
 
 
 
-
-
 // Shuffle function from http://stackoverflow.com/a/2450976
 function shuffle(array) {
     var currentIndex = array.length,
@@ -125,6 +155,8 @@ function shuffle(array) {
 }
 
 
+
+
 /*
  * Create a list that holds all of your cards
  */
@@ -139,14 +171,14 @@ function shuffle(array) {
  */
 
 /*
- * set up the event listener for a card. If a card is clicked:
- *  - display the card's symbol (put this functionality in another function that you call from this one)
- *  - add the card to a *list* of "open" cards (put this functionality in another function that you call from this one)
- *  - if the list already has another card, check to see if the two cards match
- *    + if the cards do match, lock the cards in the open position (put this functionality in another function that you call from this one)
+     * set up the event listener for a card. If a card is clicked:
+     *  - display the card's symbol (put this functionality in another function that you call from this one)
+     *  - add the card to a *list* of "open" cards (put this functionality in another function that you call from this one)
+     *  - if the list already has another card, check to see if the two cards match
+     *    + if the cards do match, lock the cards in the open position (put this functionality in another function that you call from this one)
 
- *    + if the cards do not match, remove the cards from the list and hide the card's symbol (put this functionality in another function that you call from this one)
+     *    + if the cards do not match, remove the cards from the list and hide the card's symbol (put this functionality in another function that you call from this one)
 
- *    + increment the move counter and display it on the page (put this functionality in another function that you call from this one)
- *    + if all cards have matched, display a message with the final score (put this functionality in another function that you call from this one)
- */
+     *    + increment the move counter and display it on the page (put this functionality in another function that you call from this one)
+     *    + if all cards have matched, display a message with the final score (put this functionality in another function that you call from this one)
+*/
