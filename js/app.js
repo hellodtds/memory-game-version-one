@@ -18,8 +18,11 @@ const list = [
 ];
 
 
+let itemMatch = [];
 
-
+// Currently unable to fix issue where 2 items get pushed to itemMatch instead of 1 item and then the next item.
+// Idea is to count length of itemMatch and at each click (2) a card is added for a total of 2 cards.
+// HELP???
 
 function gameBoard() {
     for (var i = 0; i < list.length; i++) {
@@ -33,6 +36,11 @@ function gameBoard() {
 
         deck.appendChild(li);
     }
+
+    // trying to remove eventlistener to fix errors with itemMatch array
+    // if (deck.children.length === 16) {
+    //     li.removeEventListener('click', gameRules, false);
+    // }
 
 
 
@@ -53,6 +61,29 @@ function gameRules(el) {
 
     // write another function
     matcher.apply(this.el, arguments);
+
+
+
+    // grabFirstItem.apply(this.el, arguments);
+
+    // grabSecondItem.apply(this.el, arguments);
+
+    // let firstItem = grabFirstItem();
+
+    // if (firstItem) {
+    //     grabSecondItem();
+    // } else if (firstItem && secondItem) {
+    //     if (firstItem == secondItem) {
+    //         return true;
+    //     } else {
+    //         return false;
+    //     }
+    // } else {
+    //     firstItem = '';
+    //     secondItem = '';
+    //     alert("no match");
+    // }
+
 }
 
 
@@ -88,18 +119,69 @@ function hello(e) {
     alert('hello');
 }
 
+
 function matcher(e) {
 
 
-    let compare = function compareBot(e) {
+
+    let compare = function(e) {
         return e.currentTarget.innerHTML;
     }
 
     let item = compare(e);
+    console.log(item);
 
 
     alert(item);
+    alert("items in itemMatch :" + itemMatch.length);
+
+    if (itemMatch.length < 1) {
+        itemMatch.push(item);
+    }
+
+    if (itemMatch.length < 2) {
+        itemMatch.push(item);
+    }
+
+    if (itemMatch.length > 2) {
+        itemMatch.length = 0;
+    }
+
+
+
+    // function matcher(e) {
+
+
+
+    //     let compare = function(e) {
+    //         return e.currentTarget.innerHTML;
+    //     }
+
+    //     let item = compare(e);
+    //     console.log(item);
+
+
+    //     alert(item);
+    //     alert("items in itemMatch :" + itemMatch.length);
+
+    //     if (itemMatch.length < 1) {
+    //         itemMatch.push(item);
+    //     }
+
+    //     if (itemMatch.length < 2) {
+    //         itemMatch.push(item);
+    //     }
+
+    //     if (itemMatch.length > 2) {
+    //         itemMatch.length = 0;
+    //     }
+
+
+
+    console.log(itemMatch);
 }
+
+
 
 
 
