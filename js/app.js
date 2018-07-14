@@ -1,3 +1,11 @@
+/* Things to do:
+1) Programmatically build initial gameboard with 2 open pieces, like example. Start from there, or close all after giving instructions.
+
+2) set time out for open and unmatched pieces
+
+3) modal window for winner
+
+*/
 const list = [
     'fa-diamond',
     'fa-paper-plane-o',
@@ -17,201 +25,91 @@ const list = [
     'fa-cube'
 ];
 
-
 let itemMatch = [];
 
-// Currently unable to fix issue where 2 items get pushed to itemMatch instead of 1 item and then the next item.
-// Idea is to count length of itemMatch and at each click (2) a card is added for a total of 2 cards.
-// HELP???
+// Initial Number of Moves, Counter
+let counter = 0;
+
+// Collect all the card
+
+
 
 function gameBoard() {
+    const deck = document.querySelector('.deck');
+
     for (var i = 0; i < list.length; i++) {
-        const deck = document.querySelector('.deck');
         let li = document.createElement('li');
         li.setAttribute('class', 'card');
-        li.innerHTML = `<i class='fa ${list[i]}'></i>`;
-
-        // li.addEventListener('click', show, false);
-        li.addEventListener('click', gameRules, false);
-
+        li.innerHTML = `<i class='fa ${shuffle(list)[i]}'></i>`;
         deck.appendChild(li);
+        li.addEventListener('click', gameRules, false);
     }
-
-    // trying to remove eventlistener to fix errors with itemMatch array
-    // if (deck.children.length === 16) {
-    //     li.removeEventListener('click', gameRules, false);
-    // }
-
-
 
 }
 
 gameBoard(); // create game board;
-
+let cards = document.getElementsByTagName('li');
 
 function gameRules(el) {
-    this.el = this;
-    open.apply(this.el, arguments);
+    if (itemMatch.length < 2) {
+        this.el = this;
+        open.apply(this.el, arguments);
 
-    // write another function
-    show.apply(this.el, arguments);
+        // write another function
+        show.apply(this.el, arguments);
 
-    // write another function
-    hello.apply(this.el, arguments);
+        matchItems.apply(this.el, arguments);
 
-    // write another function
-    matcher.apply(this.el, arguments);
+        count();
+    } else {
+        setTimeout(function() {
+            // global: all cards
+            console.log("here is where the timer function does something");
 
-
-
-    // grabFirstItem.apply(this.el, arguments);
-
-    // grabSecondItem.apply(this.el, arguments);
-
-    // let firstItem = grabFirstItem();
-
-    // if (firstItem) {
-    //     grabSecondItem();
-    // } else if (firstItem && secondItem) {
-    //     if (firstItem == secondItem) {
-    //         return true;
-    //     } else {
-    //         return false;
-    //     }
-    // } else {
-    //     firstItem = '';
-    //     secondItem = '';
-    //     alert("no match");
-    // }
-
+        }, 5000);
+    }
 }
+
 
 
 function show(e) {
     e.currentTarget.classList.toggle('show');
-
-
-    if (e.currentTarget.classList.contains('show')) {
-        alert("show card");
-    } else {
-        alert("hide card");
-    }
-
-    console.log("show function target: " + e.currentTarget.innerHTML);
-    // When this function is used as an event handler: this === e.currentTarget
 }
 
 function open(e) {
     e.currentTarget.classList.toggle('open');
-
-    if (e.currentTarget.classList.contains('open')) {
-        alert("open card");
-    } else {
-        alert("close card");
-    }
-
-    console.log("open function target: " + e.currentTarget.innerHTML);
-    // When this function is used as an event handler: this === e.currentTarget
 }
 
 
-function hello(e) {
-    alert('hello');
-}
-
-
-function matcher(e) {
-
-
-
-    let compare = function(e) {
-        return e.currentTarget.innerHTML;
-    }
-
-    let item = compare(e);
-    console.log(item);
-
-
-    alert(item);
-    alert("items in itemMatch :" + itemMatch.length);
-
-    if (itemMatch.length < 1) {
-        itemMatch.push(item);
-    }
-
+function matchItems(e) {
     if (itemMatch.length < 2) {
-        itemMatch.push(item);
+        if (itemMatch.length == 0) {
+            itemMatch.push(e.currentTarget.innerHTML);
+            console.log(itemMatch);
+        } else if (itemMatch.length == 1) {
+            itemMatch.push(e.currentTarget.innerHTML);
+
+            console.log(itemMatch);
+        }
+    } else {
+        // do something like a timer
     }
-
-    if (itemMatch.length > 2) {
-        itemMatch.length = 0;
-    }
-
-
-
-    // function matcher(e) {
-
-
-
-    //     let compare = function(e) {
-    //         return e.currentTarget.innerHTML;
-    //     }
-
-    //     let item = compare(e);
-    //     console.log(item);
-
-
-    //     alert(item);
-    //     alert("items in itemMatch :" + itemMatch.length);
-
-    //     if (itemMatch.length < 1) {
-    //         itemMatch.push(item);
-    //     }
-
-    //     if (itemMatch.length < 2) {
-    //         itemMatch.push(item);
-    //     }
-
-    //     if (itemMatch.length > 2) {
-    //         itemMatch.length = 0;
-    //     }
-
-
-
-    console.log(itemMatch);
 }
 
 
 
 
+// This function increments moves
+function count() {
 
+    // consider MAX number of moves
+    // if counter < 16, 3 stars ?
 
-
-/************* OlD WaY Of BuIldInG CaRd DeCk *************************/
-
-// const makeDeck = function(array) {
-//     let listItem = '';
-//     // For info, see: Array.prototype.values() in MDN web docs
-//     let iterator = array.values();
-
-//     for (let value of iterator) {
-//         listItem = document.createElement('li');
-//         listItem.setAttribute('class', 'card');
-//         listItem.innerHTML = `<i class='fa ${value}'></i>`;
-//         deck.appendChild(listItem);
-//     }
-// };
-
-// Shuffle Array list and make list of cards
-// makeDeck(shuffle(list));
-
-
-
-
-// Turn HTMLLIElement list into ARRAY
-// const cards = Array.from(deck.children);
-
-
+    if (counter < 16) {
+        document.querySelector('.moves').textContent = ++counter;
+        console.log('Number of moves: ' + counter);
+    }
+}
 
 
 
@@ -235,32 +133,3 @@ function shuffle(array) {
 
     return array;
 }
-
-
-
-
-/*
- * Create a list that holds all of your cards
- */
-
-
-
-/*
- * Display the cards on the page
- *   - shuffle the list of cards using the provided "shuffle" method below
- *   - loop through each card and create its HTML
- *   - add each card's HTML to the page
- */
-
-/*
-     * set up the event listener for a card. If a card is clicked:
-     *  - display the card's symbol (put this functionality in another function that you call from this one)
-     *  - add the card to a *list* of "open" cards (put this functionality in another function that you call from this one)
-     *  - if the list already has another card, check to see if the two cards match
-     *    + if the cards do match, lock the cards in the open position (put this functionality in another function that you call from this one)
-
-     *    + if the cards do not match, remove the cards from the list and hide the card's symbol (put this functionality in another function that you call from this one)
-
-     *    + increment the move counter and display it on the page (put this functionality in another function that you call from this one)
-     *    + if all cards have matched, display a message with the final score (put this functionality in another function that you call from this one)
-*/
