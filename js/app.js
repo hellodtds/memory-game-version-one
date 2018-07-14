@@ -48,7 +48,9 @@ function gameBoard() {
 }
 
 gameBoard(); // create game board;
-let cards = document.getElementsByTagName('li');
+let cards = document.getElementsByTagName('li'); // does not seem to work
+
+// document.getElementsByTagName('ul')[1].children for catching all cards (li)
 
 function gameRules(el) {
     if (itemMatch.length < 2) {
