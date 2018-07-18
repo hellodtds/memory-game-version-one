@@ -1,0 +1,33 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+</head>
+
+<body>
+    <p>A holder page for JS snippets.<br>See the console.</p>
+    <script>
+        function BookConstructor(title, author) {
+            this.title = title;
+            this.author = author;
+        }
+
+        function foo(b) {
+            var a = 10;
+            return a + b + 11;
+        }
+
+        function bar(x) {
+            var y = 3;
+            return foo(x * y);
+        }
+
+        console.log(bar(7));
+    </script>
+</body>
+
+</html>
