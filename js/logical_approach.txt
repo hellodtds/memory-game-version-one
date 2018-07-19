@@ -1,6 +1,24 @@
 
 Create a list that holds all of your cards
 
+const list = [
+    'fa-diamond',
+    'fa-paper-plane-o',
+    'fa-anchor',
+    'fa-bolt',
+    'fa-cube',
+    'fa-anchor',
+    'fa-leaf',
+    'fa-bicycle',
+    'fa-diamond',
+    'fa-bomb',
+    'fa-leaf',
+    'fa-bomb',
+    'fa-bolt',
+    'fa-bicycle',
+    'fa-paper-plane-o',
+    'fa-cube'
+];
 
 
 
@@ -14,6 +32,7 @@ Display the cards on the page
 set up the event listener for a card. If a card is clicked:
 - display the card's symbol (put this functionality in another function that you call from this one)
 
+card.
 
 - add the card to a list of "open" cards (put this functionality in another function that you call from this one)
 
