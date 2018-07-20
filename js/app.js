@@ -34,6 +34,8 @@ let counter = 0;
 
 let moves = document.querySelector(".moves");
 
+
+
 let restartTheGame = document.querySelector('.restart');
 
 let stars = document.querySelector('.stars'); //------ ul.stars
@@ -41,6 +43,7 @@ let stars = document.querySelector('.stars'); //------ ul.stars
 restartTheGame.addEventListener('click', function() {
     gameBoard();
     counter = 0;
+    stopTheGameClock()
     moves.innerHTML = 0;
     stars.innerHTML = '';
 });
@@ -63,22 +66,32 @@ function gameBoard() {
     }
 }
 
+//------ Timer Function Parts
+let timer = setInterval(gameClock, 1000);
 
+function gameClock(timer) {
+    // start timer from 0 and add a second
+    // do something
+    timer = timer;
+    var d = new Date();
+    // var t = d.toLocaleTimeString();
+    var t = d.getSeconds();
+    document.querySelector(".timer").innerHTML = t;
+}
+
+
+function stopTheGameClock() {
+    // do something
+    clearInterval(timer);
+}
+
+
+//----- initialize the game
 function intializeTheGame() {
     gameBoard(); // create game board;
-    startTimerFunc();
+    // debugger;
+    gameClock();
 }
-
-
-
-function startTimerFunc() {
-    // start timer from 0 and add a second
-}
-
-function stopTimerFunc() {
-    // start timer from 0 and add a second
-}
-
 
 function gameRules(el) {
     // debugger;
@@ -86,7 +99,6 @@ function gameRules(el) {
     if (openCard.length < 2) {
         open(el);
 
-        // write another function
         show(el);
 
         pushTheCardIntoTheOpenCardArray(el);
@@ -122,13 +134,15 @@ function match(event) {
         openCard[1].classList.remove("open", "show");
     }
     openCard = [];
-    console.log(event.target.classList);
+
 }
 
 // This function increments moves
 function count() {
     // consider MAX number of moves
     // if counter < 16, 3 stars ?
+
+
 
     moves.innerHTML = ++counter;
 
@@ -147,17 +161,20 @@ function count() {
 function ifTheGameIsOver() {
     if (itemMatch.length === 16) {
 
+        stopTheGameClock() // stop the game clock
+            // get value of timer and place in a variable timer
+        let timer = ''; // clear timer
 
         showThePlayerTheWinnerModal();
     }
 }
 
 // showThePlayerTheWinnerModal();
-
 function showThePlayerTheWinnerModal() {
-    stopTimerFunc();
-    // get value of timer and place in a variable timer
-    let timer = '';
+
+    const xToCloseModal = document.querySelector(".message-close");
+
+    const linkToCloseModal = document.querySelector('.styled'); // 'Close' text in modal display
 
     const playerMessage = document.querySelector('.message');
 
@@ -168,6 +185,17 @@ function showThePlayerTheWinnerModal() {
     // debugger;
     // console.log(playerMessage);
     playerMessage.style.display = 'block';
+
+    xToCloseModal.addEventListener('click', function(event) {
+        playerMessage.style.display = 'none';
+        restartTheGame.click(); // force reset of game
+    });
+
+    linkToCloseModal.addEventListener('click', function(event) {
+        playerMessage.style.display = 'none';
+        restartTheGame.click(); // force reset of game
+    });
+
 }
 
 
