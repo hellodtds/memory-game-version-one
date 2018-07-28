@@ -10,7 +10,7 @@
 
 <body>
     <div id="timeID">Time ID</div>
-
+    <button id="stopTimer">StOP</button>
 
     <script>
         "use strict";
@@ -19,28 +19,31 @@
         let timeID = document.getElementById('timeID');
         timeID.addEventListener('click', startTimer);
 
+        let stopButton = document.getElementById('stopTimer');
+        stopButton.addEventListener('click', function() {
+            clearInterval(timer);
+            isTimerRunning = false;
+        });
+
+        let timeContent,
+            counter,
+            minutes,
+            seconds,
+            isTimerRunning,
+            savedTimeClock,
+            timer;
+
+
         function startTimer() {
-            let time,
-                counter,
-                minutes,
-                seconds,
-                isTimerRunning;
-
-
-
+            isTimerRunning = true;
             counter = 0;
             seconds = 0;
-            minutes = 0;;
-
-            isTimerRunning = false;
+            minutes = 0;
 
             if (isTimerRunning) {
 
                 alert('start time');
-                setInterval(function() {
-
-
-
+                timer = setInterval(function() {
                     if (counter < 60) {
 
                         seconds = counter < 10 ? `0${counter++}` : parseInt(counter++ % 60);
@@ -50,12 +53,12 @@
 
                     }
 
-                    time = `${minutes}:${seconds}`;
-                    document.getElementById('timeID').textContent = time;
+                    timeContent = `${minutes}:${seconds}`;
+                    document.getElementById('timeID').textContent = timeContent;
+                    savedTimeClock = timeContent;
                 }, 1000);
 
-            } else {
-                // doSomething
+
             }
 
 
