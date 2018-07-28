@@ -34,35 +34,35 @@
             timer;
 
 
-        function startTimer() {
-            isTimerRunning = true;
-            counter = 0;
-            seconds = 0;
-            minutes = 0;
+        let tick = function() {
+            if (counter < 60) {
 
-            if (isTimerRunning) {
-
-                alert('start time');
-                timer = setInterval(function() {
-                    if (counter < 60) {
-
-                        seconds = counter < 10 ? `0${counter++}` : parseInt(counter++ % 60);
-                    } else {
-                        counter = `0${counter=0}`;
-                        minutes++;
-
-                    }
-
-                    timeContent = `${minutes}:${seconds}`;
-                    document.getElementById('timeID').textContent = timeContent;
-                    savedTimeClock = timeContent;
-                }, 1000);
-
+                seconds = counter < 10 ? `0${counter++}` : parseInt(counter++ % 60);
+            } else {
+                counter = `0${counter=0}`;
+                minutes++;
 
             }
 
+            timeContent = `${minutes}:${seconds}`;
+            document.getElementById('timeID').textContent = timeContent;
+            savedTimeClock = timeContent;
+        };
 
+        let zero = function(x) {
+            return 0;
+        };
 
+        function startTimer() {
+            isTimerRunning = true;
+            counter = zero(counter);
+            seconds = zero(seconds);
+            minutes = zero(minutes);
+
+            // if (isTimerRunning) {
+
+            alert('start time');
+            timer = setInterval(tick, 1000);
 
         }
     </script>
