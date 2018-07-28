@@ -5,33 +5,63 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
-    <title>Document</title>
+    <title>Memory Game Clock</title>
 </head>
 
 <body>
-    <p>hello</p>
-    <p>hello</p>
-    <p>hello</p>
-    <p>hello</p>
-    <p>hello</p>
+    <div id="timeID">Time ID</div>
+
 
     <script>
-        function hide(e) {
-            e.currentTarget.style.visibility = "hidden";
-            console.log(e.currentTarget);
-            // When this function is used as an event handler: this === e.currentTarget
+        "use strict";
+
+
+        let timeID = document.getElementById('timeID');
+        timeID.addEventListener('click', startTimer);
+
+        function startTimer() {
+            let time,
+                counter,
+                minutes,
+                seconds,
+                isTimerRunning;
+
+
+
+            counter = 0;
+            seconds = 0;
+            minutes = 0;;
+
+            isTimerRunning = false;
+
+            if (isTimerRunning) {
+
+                alert('start time');
+                setInterval(function() {
+
+
+
+                    if (counter < 60) {
+
+                        seconds = counter < 10 ? `0${counter++}` : parseInt(counter++ % 60);
+                    } else {
+                        counter = `0${counter=0}`;
+                        minutes++;
+
+                    }
+
+                    time = `${minutes}:${seconds}`;
+                    document.getElementById('timeID').textContent = time;
+                }, 1000);
+
+            } else {
+                // doSomething
+            }
+
+
+
+
         }
-
-        var ps = document.getElementsByTagName('p');
-
-        for (var i = 0; i < ps.length; i++) {
-            // console: print the clicked <p> element 
-            ps[i].addEventListener('click', hide, false);
-        }
-        // console: print <body>
-        document.body.addEventListener('click', hide, false);
-
-        // click around and make paragraphs disappear
     </script>
 </body>
 
